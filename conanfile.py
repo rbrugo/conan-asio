@@ -5,7 +5,8 @@ class AsioConan(ConanFile):
     version = "1.10.8"
     url = "https://github.com/bincrafters/conan-asio"
     description = "Header only C++ library that implements RFC6455 The WebSocket Protocol"
-    license = "https://github.com/chriskohlhoff/asio/blob/master/asio/LICENSE_1_0.txt"
+    license = "https://github.com/chriskohlhoff/asio/blob/master/asio/LICENSE_1_0.txt" 
+    settings = 'os'
     options = {"shared": [True, False], "with_boost_regex": [True, False], "with_openssl": [True, False]}
     default_options = "shared=False", "with_boost_regex=False", "with_openssl=False"
     
