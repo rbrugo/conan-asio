@@ -25,6 +25,15 @@ class AsioConan(ConanFile):
         extracted_dir = self.name + "-" + self.name + "-" + self.version.replace(".", "-")
         include_dir = os.path.join(extracted_dir, self.name, "include")
         self.copy(pattern="*.hpp", dst="include", src=include_dir)		
+        self.copy(pattern="*.ipp", dst="include", src=include_dir)		
 
+    def package_info(self):
+        self.cpp_info.defines = ['ASIO_STANDALONE']
+        if not self.settings.os == 'Windows':
+            self.cpp_info.cppflags = [
+                '-pthread',
+            ]
+        
     def package_id(self):
         self.info.header_only()
+        
