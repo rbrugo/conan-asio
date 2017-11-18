@@ -54,6 +54,7 @@ class AsioConan(ConanFile):
         )
         print(include_dir)
         self.copy(pattern="*.hpp", dst="include", src=include_dir)
+        self.copy(pattern="*.ipp", dst="include", src=include_dir)
 
     def package_info(self):
         if self.options.standalone:
