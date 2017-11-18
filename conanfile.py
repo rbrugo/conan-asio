@@ -12,12 +12,10 @@ class AsioConan(ConanFile):
     )
     license = "https://github.com/chriskohlhoff/asio/blob/master/asio/LICENSE_1_0.txt"
     options = {
-        "shared": [True, False],
         "with_boost_regex": [True, False],
         "with_openssl": [True, False]
     }
     default_options = (
-        "shared=False",
         "with_boost_regex=False",
         "with_openssl=False"
     )
