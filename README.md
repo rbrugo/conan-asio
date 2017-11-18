@@ -1,4 +1,4 @@
-## This repository holds a conan recipe for websocketpp.
+## This repository holds a conan recipe for Asio.
 
 [Conan.io](https://conan.io) package for [Asio](http://think-async.com/Asio) project
 
