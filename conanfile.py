@@ -4,7 +4,7 @@ from conans.errors import ConanException
 
 class AsioConan(ConanFile):
     name = "Asio"
-    version = "1.10.8"
+    version = "1.11.0"
     url = "https://github.com/bincrafters/conan-asio"
     description = (
         "Asio is a cross-platform C++ library for network and low-level I/O "
@@ -54,6 +54,7 @@ class AsioConan(ConanFile):
         )
         print(include_dir)
         self.copy(pattern="*.hpp", dst="include", src=include_dir)
+        self.copy(pattern="*.ipp", dst="include", src=include_dir)
 
     def package_info(self):
         if self.options.standalone:
