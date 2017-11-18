@@ -1,4 +1,5 @@
 from conans import ConanFile, tools, os
+from conans.errors import ConanException
 
 
 class AsioConan(ConanFile):
@@ -12,13 +13,22 @@ class AsioConan(ConanFile):
     )
     license = "https://github.com/chriskohlhoff/asio/blob/master/asio/LICENSE_1_0.txt"
     options = {
+        "standalone": [True, False],
         "with_boost_regex": [True, False],
         "with_openssl": [True, False]
     }
     default_options = (
+        "standalone=True",
         "with_boost_regex=False",
         "with_openssl=False"
     )
+
+    def configure(self):
+        if self.options.standalone and self.options.with_boost_regex:
+            raise ConanException(
+                "'standalone' and 'with_boost_regex' are mutually exclusive! "
+                "Please disable one of them."
+            )
 
     def requirements(self):
         if self.options.with_boost_regex:
@@ -44,6 +54,10 @@ class AsioConan(ConanFile):
         )
         print(include_dir)
         self.copy(pattern="*.hpp", dst="include", src=include_dir)
+
+    def package_info(self):
+        if self.options.standalone:
+            self.cpp_info.cppflags = ['-DASIO_STANDALONE']
 
     def package_id(self):
         self.info.header_only()
