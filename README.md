@@ -8,14 +8,14 @@ The packages generated with this **conanfile** can be found in [Bintray](https:/
 
 ### Basic setup
 
-    $ conan install Asio/1.10.8@bincrafters/stable
+    $ conan install Asio/1.11.0@bincrafters/stable
 
 ### Project setup
 
 If you handle multiple dependencies in your project is better to add a *conanfile.txt*
 
     [requires]
-    Asio/1.10.8@bincrafters/stable
+    Asio/1.11.0@bincrafters/stable
 
     [generators]
     txt
@@ -44,7 +44,7 @@ This is a header only library, so nothing needs to be built.
 
 ## Upload
 
-    $ conan upload Asio/1.10.8@bincrafters/stable -r bincrafters
+    $ conan upload Asio/1.11.0@bincrafters/stable -r bincrafters
 
 ### License
 [Boost](https://github.com/chriskohlhoff/asio/blob/master/asio/LICENSE_1_0.txt)
