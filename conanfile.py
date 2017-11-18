@@ -1,6 +1,9 @@
-from conans import ConanFile, tools, os
-from conans.errors import ConanException
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
+import os
+from conans import ConanFile, tools
+from conans.errors import ConanException
 
 class AsioConan(ConanFile):
     name = "Asio"
@@ -52,13 +55,12 @@ class AsioConan(ConanFile):
             self.name.lower(),
             "include"
         )
-        print(include_dir)
         self.copy(pattern="*.hpp", dst="include", src=include_dir)
         self.copy(pattern="*.ipp", dst="include", src=include_dir)
 
     def package_info(self):
         if self.options.standalone:
             self.cpp_info.cppflags = ['-DASIO_STANDALONE']
-
+        
     def package_id(self):
         self.info.header_only()
