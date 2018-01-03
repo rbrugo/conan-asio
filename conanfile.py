@@ -6,7 +6,7 @@ from conans import ConanFile, tools
 from conans.errors import ConanException
 
 class AsioConan(ConanFile):
-    name = "Asio"
+    name = "asio"
     version = "1.11.0"
     url = "https://github.com/bincrafters/conan-asio"
     description = (
@@ -14,7 +14,9 @@ class AsioConan(ConanFile):
         "programming that provides developers with a consistent asynchronous "
         "model using a modern C++ approach."
     )
-    license = "https://github.com/chriskohlhoff/asio/blob/master/asio/LICENSE_1_0.txt"
+    license = "BSL-1.0"
+    exports = ["LICENSE.md"]
+    source_subfolder = "source_subfolder"
     options = {
         "standalone": [True, False],
         "with_boost_regex": [True, False],
@@ -44,17 +46,11 @@ class AsioConan(ConanFile):
         source_url = "https://github.com/chriskohlhoff/asio"
         archive_name = "asio-" + self.version.replace(".", "-")
         tools.get("{0}/archive/{1}.tar.gz".format(source_url,  archive_name))
-
+        extracted_name =  "asio-" + archive_name
+        os.rename(extracted_name, self.source_subfolder)
+        
     def package(self):
-        extracted_dir = "{0}-{0}-{1}".format(
-            self.name.lower(),
-            self.version.replace('.', '-')
-        )
-        include_dir = os.path.join(
-            extracted_dir,
-            self.name.lower(),
-            "include"
-        )
+        include_dir = os.path.join(self.source_subfolder, self.name, "include")
         self.copy(pattern="*.hpp", dst="include", src=include_dir)
         self.copy(pattern="*.ipp", dst="include", src=include_dir)
 
