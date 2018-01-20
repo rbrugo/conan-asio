@@ -37,10 +37,10 @@ class AsioConan(ConanFile):
 
     def requirements(self):
         if self.options.with_boost_regex:
-            self.requires.add("Boost.Regex/1.64.0@bincrafters/stable")
+            self.requires.add("Boost.Regex/[>=1.64.0]@bincrafters/stable")
 
         if self.options.with_openssl:
-            self.requires.add("OpenSSL/1.0.2@conan/stable")
+            self.requires.add("OpenSSL/[>=1.0.2]@conan/stable")
 
     def source(self):
         source_url = "https://github.com/chriskohlhoff/asio"
@@ -50,7 +50,9 @@ class AsioConan(ConanFile):
         os.rename(extracted_name, self.source_subfolder)
         
     def package(self):
-        include_dir = os.path.join(self.source_subfolder, self.name, "include")
+        root_dir = os.path.join(self.source_subfolder, self.name)
+        include_dir = os.path.join(root_dir, "include")
+        self.copy(pattern="LICENSE_1_0.txt", dst="license", src=root_dir)
         self.copy(pattern="*.hpp", dst="include", src=include_dir)
         self.copy(pattern="*.ipp", dst="include", src=include_dir)
 
