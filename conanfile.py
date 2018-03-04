@@ -27,6 +27,7 @@ class AsioConan(ConanFile):
         "with_boost_regex=False",
         "with_openssl=False"
     )
+    settings = "os"
 
     def configure(self):
         if self.options.standalone and self.options.with_boost_regex:
@@ -48,7 +49,7 @@ class AsioConan(ConanFile):
         tools.get("{0}/archive/{1}.tar.gz".format(source_url,  archive_name))
         extracted_name =  "asio-" + archive_name
         os.rename(extracted_name, self.source_subfolder)
-        
+
     def package(self):
         root_dir = os.path.join(self.source_subfolder, self.name)
         include_dir = os.path.join(root_dir, "include")
@@ -59,6 +60,8 @@ class AsioConan(ConanFile):
     def package_info(self):
         if self.options.standalone:
             self.cpp_info.cppflags = ['-DASIO_STANDALONE']
-        
+        if self.settings.os == 'Linux':
+            self.cpp_info.libs.append('pthread')
+
     def package_id(self):
         self.info.header_only()
