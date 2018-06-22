@@ -7,7 +7,7 @@ from conans.errors import ConanException
 
 class AsioConan(ConanFile):
     name = "asio"
-    version = "1.11.0"
+    version = "1.12.0"
     url = "https://github.com/bincrafters/conan-asio"
     description = (
         "Asio is a cross-platform C++ library for network and low-level I/O "
